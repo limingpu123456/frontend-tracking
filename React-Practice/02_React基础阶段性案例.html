@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>购物车案例</title>
+    <style>
+      table{
+        border-collapse: collapse;
+        text-align: center;
+      }
+      thead{
+        background-color: #f2f2f2;
+      }
+      td,th{
+        padding:10px 16px;
+        border:1px solid #aaa;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="root"></div>
+    <!-- 添加依赖  -->
+    <script
+      crossorigin
+      src="https://unpkg.com/react@18/umd/react.development.js"
+    ></script>
+    <script
+      crossorigin
+      src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"
+    ></script>
+    <script src="https://unpkg.com/babel-standalone@6/babel.min.js"></script>
+
+    <script type="text/babel">
+
+      class App extends React.Component {
+        constructor(props) {
+          super(props);
+          this.state = {
+           message:"hello world",
+           books: [
+                    {
+                      id: 1,
+                      name: '《算法导论》',
+                      date: '2006-9',
+                      price: 85.00,
+                      count: 1
+                    },
+                    {
+                      id: 2,
+                      name: '《UNIX编程艺术》',
+                      date: '2006-2',
+                      price: 59.00,
+                      count: 1
+                    },
+                    {
+                      id: 3,
+                      name: '《编程珠玑》',
+                      date: '2008-10',
+                      price: 39.00,
+                      count: 1
+                    },
+                    {
+                      id: 4,
+                      name: '《代码大全》',
+                      date: '2006-3',
+                      price: 128.00,
+                      count: 1
+                    },
+                  ]
+          };
+        }
+
+        increment(index){
+          //先做一个浅拷贝
+          const newBooks = [...this.state.books]
+          newBooks[index].count += 1
+          this.setState({ books:newBooks })
+        }
+
+        decrement(index){
+          //先做一个浅拷贝
+          const newBooks = [...this.state.books]
+          newBooks[index].count -= 1
+          this.setState({ books:newBooks })
+        }
+
+        removeItem(index){
+          const newBooks = [...this.state.books]
+          newBooks.splice(index,1)
+          this.setState({books:newBooks})
+        }
+
+        renderBooks(){
+          const { books }  = this.state
+          //1.计算总价格的方式一
+          // let totalPrice = 0
+          // for(let i = 0 ; i < books.length ; i++){
+          //   const book = books[i]
+          //   totalPrice += book.price * book.count
+          // }
+          
+          //2.计算总价格的方式二
+          let totalPrice = books.reduce((preValue,item)=>{
+            return preValue + (item.count * item.price)
+          },0)
+
+          return <div>
+              <table>
+                <thead>
+                  <tr>
+                    <th>序号</th>
+                    <th>书籍名称</th>
+                    <th>出版日期</th>
+                    <th>价格</th>
+                    <th>购买数量</th>
+                    <th>操作</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {
+                    books.map((item,index)=>{
+                      return(
+                        <tr key={item.id}>
+                          <td>{index + 1}</td>
+                          <td>{item.name}</td>
+                          <td>{item.date}</td>
+                          <td>{"￥" + (item.price).toFixed(2)}</td>
+                          <td>
+                            <button disabled={item.count <= 1} onClick={()=>{this.decrement(index)}}>-</button>
+                            {item.count}
+                            <button onClick={()=>this.increment(index)}>+</button>
+                          </td>
+                          <td><button onClick={()=>{this.removeItem(index)}}>删除</button></td>
+                        </tr>
+                      )
+                    })
+                  }
+                </tbody>
+              </table>
+              <h2>总价格: { "￥" + Number(totalPrice).toFixed(2)}</h2>
+            </div>
+        }
+
+        renderBookEmpty(){
+          return <div><h2>购物车为空，请添加书籍~</h2></div>
+        }
+
+        render() {
+          const {message,books} = this.state
+          return books.length ? this.renderBooks():this.renderBookEmpty();
+        }
+      }
+      const root = ReactDOM.createRoot(document.querySelector("#root"));
+      root.render(<App />);
+    </script>
+  </body>
+</html>

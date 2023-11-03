@@ -1,13 +1,18 @@
-import ReactDOM from "react-dom/client"
-import React from "react"
-import axios from "axios"
-class App extends React.Component {
-    constructor(props) {
-        super(props)
-        this.state = {
-        }
-    }
-    componentDidMount(){
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <button id="myButton">点击</button>
+    <div id = 'imgs'>
+        <ul></ul>
+    </div>
+    <script src="axios.js"></script>
+    <script>
         document.querySelector('#myButton').addEventListener('click', clickFn)
         async function clickFn(){
             let imgList =[]
@@ -45,18 +50,6 @@ class App extends React.Component {
             })
             return res.data.data
         }
-    }
-    render(){
-        return(
-            <div>
-              <button id="myButton">点击</button>
-                <div id = 'imgs'>
-                    <ul></ul>
-                </div>
-            </div>
-        )
-    }
-}
-
-const root = ReactDOM.createRoot(document.querySelector("#root"))
-root.render(<App/>)
+    </script>
+</body>
+</html>

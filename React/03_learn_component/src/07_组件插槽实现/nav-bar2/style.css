@@ -1,0 +1,19 @@
+.nav-bar{
+  display: flex;
+  height: 40px;
+  text-align: center;
+  line-height: 40px;
+}
+.left, .right{
+  width: 80px;
+  background-color: #f00;
+}
+.center{ 
+  flex:1;
+  background-color: #f80;
+}
+
+h2{
+  margin: 0; 
+  padding: 0;
+}

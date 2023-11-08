@@ -15,7 +15,7 @@ export class TabControl extends Component {
   }
 
   render() {
-    const {titles} = this.props;
+    const {titles,itemType} = this.props;
     const {currentIndex} = this.state;
 
     return (
@@ -28,7 +28,8 @@ export class TabControl extends Component {
                 key={item}
                 onClick={e => this.itemClick(index)}
               >
-                <span className='text'>{item}</span>
+                {/* <span className='text'>{item}</span> */}
+                {itemType(item)}
               </div>
             )
           })

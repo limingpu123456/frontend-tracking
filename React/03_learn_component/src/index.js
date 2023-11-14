@@ -6,7 +6,8 @@ import ReactDOM from 'react-dom/client';
 // import App from './05_子传父通信/App.jsx'
 // import App from './07_组件插槽实现/App.jsx'
 // import App from './08_组件作用域插槽/App.jsx'
-import App from './09_非父子通信-context/App.jsx'
+// import App from './09_非父子通信-context/App.jsx'
+import App from './TS中类型别名的使用/App.jsx';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(<App />);

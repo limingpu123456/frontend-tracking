@@ -9,7 +9,7 @@ const App = memo((props) => {
     setMessage("你好啊，李银河")
   }
 
-  return (
+  return ( 
     <div>
       <h2>App:{message}</h2>      
       <button onClick={changeMessage}>修改文本</button>
